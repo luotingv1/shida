@@ -2,7 +2,7 @@
 const path = require('path');
 const fs = require('fs-extra');
 const {isEmpty, forEach} = require('lodash');
-const {FFRect, FFScene, FFImage, FFText, FFGifImage, FFVideo, FFAlbum, FFCreator} = require('ffcreator');
+const {FFRect, FFScene, FFImage, FFText, FFGifImage, FFVideo, FFAlbum, FFCreator, FFSubtitle} = require('ffcreator');
 const ffmpeg = require('fluent-ffmpeg');
 const {scaleVideoByCenter} = require("../../utils/crop");
 
@@ -77,10 +77,6 @@ const addComponent = async element => {
       }else {
         comp.setFont('../public/static/demo/wryh.ttf');
       }
-
-
-
-
       comp.setAnchor(0.5);
       comp.alignCenter();
       break;

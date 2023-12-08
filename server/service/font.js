@@ -61,13 +61,13 @@ module.exports = app => ({
                     const newFontName = newFontFileArray[k].split('.')[0];
                     if (oldFontFace.indexOf(newFontFile) === -1) {
                       content = `
-@font-face {
-    font-family: "${newFontName}";
-    src: url('./src/${newFontFile}');
-    font-weight: normal;
-    font-style: normal;
-} \r\n
-`;
+                        @font-face {
+                            font-family: "${newFontName}";
+                            src: url('./src/${newFontFile}');
+                            font-weight: normal;
+                            font-style: normal;
+                        } \r\n
+                        `;
                       fs.writeFileSync('./client/common/text-fonts/index.css', content, { flag: 'a+' });
                     }
                   }
