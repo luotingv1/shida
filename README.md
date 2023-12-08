@@ -4,15 +4,15 @@
 
 ## 介绍
 
-《视搭》是一个视频可视化搭建项目。您可以通过简单的拖拽方式快速生产一个短视频，使用方式就像易企秀或百度 H5 等 h5 搭建工具一样的简单。目前行业内罕有关于视频可视化搭建的开源项目，《视搭》是一个相对比较完整的开源项目，仅抛砖引玉希望您喜欢。
+是一个视频可视化搭建项目。您可以通过简单的拖拽方式快速生产一个短视频，使用方式就像易企秀或百度 H5 等 h5 搭建工具一样的简单。目前行业内罕有关于视频可视化搭建的开源项目，是一个相对比较完整的开源项目，仅抛砖引玉希望您喜欢。
 
-《视搭》的后端视频合成部分是基于`FFCreator`[https://github.com/tnfe/FFCreator](https://github.com/tnfe/FFCreator)这个库开发的，FFCreator 是一个基于 node.js 的轻量、灵活的短视频加工库。您只需要添加几张图片或视频片段再加一段背景音乐，就可以快速生成一个很酷的视频短片。
+的后端视频合成部分是基于`FFCreator`[https://github.com/tnfe/FFCreator](https://github.com/tnfe/FFCreator)这个库开发的，FFCreator 是一个基于 node.js 的轻量、灵活的短视频加工库。您只需要添加几张图片或视频片段再加一段背景音乐，就可以快速生成一个很酷的视频短片。
 
 <p align="center">
  <img width="650px" src="https://tnfe.github.io/FFCreator/_media/logo/logo.png" />
 </p>
 
-《视搭》前端部分 fork 自[quark-h5](https://github.com/huangwei9527/quark-h5)项目开发，本项目未做太多扩展。quark-h5 是一个很棒的 h5 搭建开源工具，架构合理、代码比较清晰易读，感谢作者。
+前端部分 fork 自[quark-h5](https://github.com/huangwei9527/quark-h5)项目开发，本项目未做太多扩展。quark-h5 是一个很棒的 h5 搭建开源工具，架构合理、代码比较清晰易读，感谢作者。
 
 **项目预览：**
 

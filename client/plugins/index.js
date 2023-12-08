@@ -3,6 +3,7 @@
  * */
 
 import Text from "./text";
+import Subtitle from "./subtitle";
 import Image from "./image";
 import Video from "./video";
 import ImageCarousel from "./image-carousel";
@@ -12,7 +13,7 @@ import Button from "./button";
 import bgMusic from "./bg-music";
 
 // 所有组件列表
-const components = [Text, Image, Video, ImageCarousel, RectangleBorder, Iframe, Button, bgMusic];
+const components = [Text, Subtitle, Image, Video, ImageCarousel, RectangleBorder, Iframe, Button, bgMusic];
 // 定义 install 方法，接收 Vue 作为参数
 const install = function(Vue) {
   // 判断是否安装，安装过就不继续往下执行
@@ -32,7 +33,7 @@ components.forEach(item => {
   _qk_register_components_object[item.name] = item;
 });
 
-export { Text, Image, ImageCarousel, RectangleBorder, Iframe, Button, bgMusic, _qk_register_components_object };
+export { Text, Subtitle, Image, ImageCarousel, RectangleBorder, Iframe, Button, bgMusic, _qk_register_components_object };
 
 export default {
   install

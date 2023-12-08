@@ -1,7 +1,6 @@
 <template>
   <div class="page page-login">
     <div class="login-page-inner">
-      <p class="title">视搭</p>
       <el-form :model="formData" :rules="formRules" ref="loginForm" label-width="0px">
         <el-form-item prop="username">
           <el-input

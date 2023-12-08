@@ -50,7 +50,7 @@ let pageConfig = {
   name: "",
   elements: [],
   commonStyle: {
-    backgroundColor: "#044EC5",
+    backgroundColor: "rgba(255, 255, 255, 0)",
     backgroundImage: "",
     backgroundSize: "cover"
   },
@@ -66,8 +66,8 @@ let pageConfig = {
 // 项目配置信息字段
 let projectConfig = {
   name: "",
-  title: "视搭视频",
-  description: "我用视搭可视化编辑器做了一个超酷炫的视频，快来看看吧。",
+  title: "视频",
+  description: "我用可视化编辑器做了一个超酷炫的视频，快来看看吧。",
   coverImage: "",
   author: "",
   script: "",

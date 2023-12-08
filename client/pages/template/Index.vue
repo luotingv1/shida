@@ -209,7 +209,7 @@ export default {
     async publishFn() {
   
       //先改名-改过了就不进行
-      if (this.projectData.title === '视搭视频'){
+      if (this.projectData.title === '视频'){
         this.$prompt("请输入标题", "提示", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
