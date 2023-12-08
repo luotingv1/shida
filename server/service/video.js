@@ -99,21 +99,23 @@ const addComponent = async (element) => {
       comp = new FFSubtitle({
         text: subtitle,
         comma: true,
+        // path: path.join(__dirname, '../public/static/demo/tts.srt'),
         ...commomStyle,
       });
       comp.setStyle(element.commonStyle);
-      if (fs.pathExistsSync(fontFile2)) {
-        comp.setFont(fontFile2);
-      } else {
-        comp.setFont("../public/static/demo/wryh.ttf");
-      }
+      // comp.setSpeech(path.join(__dirname, '../public/static/demo/tts.wav'));
       comp.frameBuffer = 24;
-      comp.alignCenter();
+      comp.setDuration(6)
+      // if (fs.pathExistsSync(fontFile2)) {
+      //   comp.setFont(fontFile2);
+      // } else {
+      //   comp.setFont("../public/static/demo/wryh.ttf");
+      // }
+      console.log(comp,'subtitlesubtitlesubtitle')
       break;
 
     case "qk-video":
       url = getNetPath(element.propsValue.videoSrc);
-      console.log(url);
       // url = path.join(__dirname, '../public', element.propsValue.videoSrc)
       let videoUrlCropped = "";
       videoUrlCropped = `${path.dirname(url)}/${path

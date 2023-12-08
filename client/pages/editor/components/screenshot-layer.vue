@@ -237,7 +237,7 @@ export default {
             isGIF = true
         }
         // console.log(!isEmpty(ele.animations))
-        return !isEmpty(ele.animations) || ele.elName === "qk-video" || ele.elName === "qk-image-carousel" || isGIF;
+        return !isEmpty(ele.animations) || ele.elName === "qk-video" || ele.elName === "qk-image-carousel" || isGIF || ele.elName === 'qk-subtitle';
       };
 
       for (let i = 0; i < pagesData.pages.length; i++) {

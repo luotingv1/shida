@@ -4,6 +4,7 @@ module.exports = app => {
   // 登录注册认证
   router.post("/quark/auth/login", $controller.auth.login);
   router.post("/quark/auth/register", $controller.auth.register);
+  router.post("/quark/auth/signIn", $controller.auth.signIn);
 
   // 用户
   router.get("/quark/user/info", $middleware.auth, $controller.user.getUserInfo);

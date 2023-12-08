@@ -3,7 +3,7 @@
  * */
 import store from "@/store";
 import router from "@/router";
-import { login, register, getUserInfo } from "@/api";
+import { login, register, getUserInfo, signin } from "@/api";
 
 let userModel = {
   /**
@@ -23,6 +23,19 @@ let userModel = {
   async doLogin(data) {
     return new Promise((resolve, reject) => {
       login(data)
+        .then(res => {
+          store.commit("UPDATE_ACCESS_TOKEN", res.body.access_token);
+          store.commit("UPDATE_USER_INFO", res.body.userInfo);
+          resolve(res.body);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  },
+  async signIn(data) {
+    return new Promise((resolve, reject) => {
+      signin(data)
         .then(res => {
           store.commit("UPDATE_ACCESS_TOKEN", res.body.access_token);
           store.commit("UPDATE_USER_INFO", res.body.userInfo);

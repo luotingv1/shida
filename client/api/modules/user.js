@@ -4,6 +4,8 @@
 import $axios from "@/service/httpServer";
 // 登录
 export const login = p => $axios.post('/quark/auth/login', p);
+// 注册登录
+export const signin = p => $axios.post('/quark/auth/signIn', p);
 // 注册
 export const register = p => $axios.post('/quark/auth/register', p);
 // 获取用户信息

@@ -12,13 +12,13 @@
             <i slot="prefix" class="iconfont icon-zhanghao"></i>
           </el-input>
         </el-form-item>
-        <el-form-item prop="email" v-if="type === 'register'">
+        <!-- <el-form-item prop="email" v-if="type === 'register'">
           <el-input v-model="formData.email" autocomplete="off" placeholder="请输入邮箱" @keyup.enter.native="doLogin">
             <span slot="prefix" class="iconfont icon-mail-copy"></span>
           </el-input>
-        </el-form-item>
-        <el-form-item prop="password">
-          <el-input
+        </el-form-item> -->
+        <!--  <el-form-item prop="password">
+         <el-input
             v-model="formData.password"
             name="password"
             placeholder="请输入密码"
@@ -30,8 +30,8 @@
             <span slot="suffix" class="cursor-pointer" @mousedown="mousedownPassword">
               <i class="iconfont icon-yincangmima"></i>
             </span>
-          </el-input>
-          <el-input
+          </el-input> 
+        <el-input
             v-model="formData.password"
             name="password"
             placeholder="请输入密码"
@@ -43,18 +43,20 @@
             <span slot="suffix" class="cursor-pointer" @mousedown="mousedownText">
               <i class="iconfont icon-xianshimima"></i>
             </span>
-          </el-input>
-        </el-form-item>
+          </el-input> 
+        </el-form-item>-->
         <el-form-item>
-          <div class="btn-hover" @click="doSubmit">{{ type === "login" ? "登录" : "注册" }}</div>
+          <div class="btn-hover" @click="doSubmit">
+            {{ type === "login" ? "登录" : "注册" }}
+          </div>
         </el-form-item>
       </el-form>
-      <div class="switch-do-type marginB20">
+      <!-- <div class="switch-do-type ">
         <p class="" @click="switchType">
           <i class="iconfont icon-iconfontzhizuobiaozhun47"></i>
           <span>{{ type === "login" ? "立即注册" : "马上登录" }}</span>
         </p>
-      </div>
+      </div> -->
     </div>
     <div class="login-background">
       <loginBackground />
@@ -72,7 +74,7 @@ export default {
     [Form.name]: Form,
     [FormItem.name]: FormItem,
     [Input.name]: Input,
-    loginBackground
+    loginBackground,
   },
   data() {
     return {
@@ -81,32 +83,53 @@ export default {
       inputType: "password",
       type: "login",
       formData: {
-        email: "",
+        // email: "",
         username: "",
-        password: ""
+        password: "",
       },
       formRules: {
         username: [{ required: true, message: "用户名不能为空", trigger: "blur" }],
-        password: [{ required: true, message: "密码不能为空", trigger: "blur" }]
-      }
+        password: [{ required: true, message: "密码不能为空", trigger: "blur" }],
+      },
     };
   },
   created() {
     // 进入登录页面先清空个人信息
-    this.fromUrl = this.$route.query.from ? window.decodeURIComponent(this.$route.query.from) : "";
+    this.fromUrl = this.$route.query.from
+      ? window.decodeURIComponent(this.$route.query.from)
+      : "";
   },
   methods: {
-    /**
-			 登陆
-			 */
+    /**登陆*/
+    // doSubmit() {
+    //   // 验证成功
+    //   this.$refs.loginForm.validate(valid => {
+    //     let fnName = this.type === "login" ? "doLogin" : "doRegister";
+    //     if (valid) {
+    //       this[fnName]();
+    //     } else {
+    //       this.$store.dispatch("showMassage", { type: "error", message: "请正确填写表单！" });
+    //       return false;
+    //     }
+    //   });
+    // },
     doSubmit() {
       // 验证成功
-      this.$refs.loginForm.validate(valid => {
-        let fnName = this.type === "login" ? "doLogin" : "doRegister";
+      this.$refs.loginForm.validate((valid) => {
         if (valid) {
-          this[fnName]();
+          let formData = { ...this.formData };
+          userModel.signIn(formData).then(() => {
+            if (this.fromUrl) {
+              this.$router.push(this.fromUrl);
+            } else {
+              userModel.goBeforeLoginUrl();
+            }
+          });
         } else {
-          this.$store.dispatch("showMassage", { type: "error", message: "请正确填写表单！" });
+          this.$store.dispatch("showMassage", {
+            type: "error",
+            message: "请正确填写表单！",
+          });
           return false;
         }
       });
@@ -133,7 +156,7 @@ export default {
         }
       });
     },
-    switchType() { 
+    switchType() {
       if (this.type === "login") {
         this.type = "register";
       } else {
@@ -148,8 +171,8 @@ export default {
     },
     mouseup() {
       this.inputType = "password";
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -186,7 +209,7 @@ export default {
   position: relative;
   z-index: 10;
   width: 360px;
-  padding: 20px 40px;
+  padding: 40px 40px 20px;
   margin-top: -120px;
   background: white;
   box-shadow: 0px 0px 0px rgba(58, 127, 158, 0.35);
@@ -204,7 +227,6 @@ export default {
     鼠标悬浮渐变
     */
   .btn-hover {
-    margin-top: 20px;
     text-align: center;
     color: white;
     background: $color-gradient;

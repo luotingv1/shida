@@ -15,7 +15,7 @@ import "@/common/styles/element-variables.scss";
 import "@/common/styles/index.scss"; // 自定义 css
 import "animate.css";
 import VueClipboard from "vue-clipboard2";
-import '@/common/text-fonts/index.css'
+import "@/common/text-fonts/index.css";
 
 Vue.use(Element);
 Vue.use(VueClipboard);
@@ -35,7 +35,7 @@ Vue.prototype.$API = API;
 Vue.prototype.$config = config;
 
 // 注册全局过滤器
-Object.keys(filters).forEach(key => {
+Object.keys(filters).forEach((key) => {
   Vue.filter(key, filters[key]);
 });
 
@@ -57,7 +57,9 @@ Vue.prototype.goBeforeLoginUrl = () => {
   }
 };
 
-String.prototype.replaceAll = function(s1, s2) {
+
+
+String.prototype.replaceAll = function (s1, s2) {
   return this.replace(new RegExp(s1, "gm"), s2);
 };
 
@@ -68,5 +70,5 @@ store.commit("UPDATE_USER_FROM_LOCAL");
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount("#app");

@@ -48,13 +48,11 @@ module.exports = app => ({
     }
 
     // 验证是否已注册
-    const users = await $service.user.getUsersByQuery({ $or: [{ username }, { email }] });
-
+    const users = await $service.user.getUsersByQuery({ $or: [{ username }] });
     if (users.length > 0) {
       $helper.returnBody(false, {}, "用户名或邮箱已被注册!");
       return;
     }
-
     let pass = await $helper.createPassword(password.toString());
     let userData = await $service.user.createUser(username, pass, email);
     userData = userData.toObject();
@@ -62,5 +60,33 @@ module.exports = app => ({
     // 生成token
     let token = await $helper.createToken(userDataStr);
     $helper.returnBody(true, { access_token: token, userInfo: userData }, "注册成功!");
+  },
+
+ /**
+   * 注册并登录
+   * @returns {Promise<void>}
+   */
+
+  async signIn() {
+    const { ctx, $service, $helper } = app;
+    const { username} = ctx.request.body;
+
+    let user = await $service.user.getUsersByUsername(username);
+    if (!user) {
+      //用户不存在 去注册
+      let pass = await $helper.createPassword('111111');
+      let userData = await $service.user.createUser(username, pass, '');
+      userData = userData.toObject();
+      let userDataStr = JSON.parse(JSON.stringify(userData));
+       // 生成token
+      let token = await $helper.createToken(userDataStr);
+      $helper.returnBody(true, { access_token: token, userInfo: userData }, "注册并登录成功!");
+    }else{
+      user = user.toObject();
+      let userDataStr = JSON.parse(JSON.stringify(user));
+      // 生成token
+      let token = await $helper.createToken(userDataStr);
+      $helper.returnBody(true, { access_token: token, userInfo: user }, "登录成功!");
+    }
   }
 });
