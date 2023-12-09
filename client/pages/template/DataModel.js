@@ -54,7 +54,7 @@ let pageConfig = {
   name: "",
   elements: [],
   commonStyle: {
-    backgroundColor: "#044EC5",
+    backgroundColor: "rgba(255, 255, 255, 1)",
     backgroundImage: "",
     backgroundSize: "cover"
   },

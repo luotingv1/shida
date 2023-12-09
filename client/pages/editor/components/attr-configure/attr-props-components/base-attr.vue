@@ -29,7 +29,6 @@
             <el-input-number size="mini" v-model="activeElement.commonStyle.top" controls-position="right" />
             <div class="attr-item-edit-input-des">Y</div>
           </div>
-         
         </div>
         <div class="attr-item-edit-wrapper">
           <p class="attr-item-title">旋转：</p>

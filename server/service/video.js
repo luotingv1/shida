@@ -55,7 +55,6 @@ const addComponent = async (element) => {
   switch (element.elName) {
     case "qk-image":
       url = getImgPath(element.propsValue);
-      // console.log(element.propsValue)
       console.log(url);
       // url = path.join(__dirname, '../public', element.propsValue.imageSrc)
       const imgExt = path.extname(url).split(".").pop();
@@ -93,7 +92,8 @@ const addComponent = async (element) => {
       break;
 
     case "qk-subtitle":
-      const subtitle = element.propsValue.text;
+      let subtitle = element.propsValue.subtitle.replace('，',' ').replace(/[\r\n]/g,"，");
+      let arr=subtitle.split('，');
       const fontName2 = element.propsValue.font.split("/")[1];
       const fontFile2 = fontRootPath + walk(fontRootPath, fontName2);
       comp = new FFSubtitle({
@@ -105,13 +105,12 @@ const addComponent = async (element) => {
       comp.setStyle(element.commonStyle);
       // comp.setSpeech(path.join(__dirname, '../public/static/demo/tts.wav'));
       comp.frameBuffer = 24;
-      comp.setDuration(6)
-      // if (fs.pathExistsSync(fontFile2)) {
-      //   comp.setFont(fontFile2);
-      // } else {
-      //   comp.setFont("../public/static/demo/wryh.ttf");
-      // }
-      console.log(comp,'subtitlesubtitlesubtitle')
+      comp.setDuration(arr.length);
+      if (fs.pathExistsSync(fontFile2)) {
+        comp.setFont(fontFile2);
+      } else {
+        comp.setFont(path.join(__dirname, '../public/static/demo/wryh.ttf'));
+      }
       break;
 
     case "qk-video":
@@ -136,7 +135,6 @@ const addComponent = async (element) => {
       break;
 
     case "qk-image-carousel":
-      // console.log("carousel")
       const list = element.propsValue.imageSrcList.map((x) =>
         getImgPath({ imageSrc: x })
       );
@@ -152,7 +150,6 @@ const addComponent = async (element) => {
       comp.addEffect(type, duration, delay);
     });
   }
-  // console.log(comp)
   return comp;
 };
 
@@ -219,13 +216,11 @@ module.exports = (app) => ({
     for (let i = 0; i < videoData.pages.length; i++) {
       const page = videoData.pages[i];
       const { duration, transDuration, trans, backgroundColor } = page.data;
-
       const scene = new FFScene();
       scene.setBgColor(backgroundColor);
       scene.setDuration(duration);
       scene.setTransition(trans, transDuration);
       creator.addChild(scene);
-
       for (let j = 0; j < page.elements.length; j++) {
         const element = page.elements[j];
         const comp = await addComponent(element);

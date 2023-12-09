@@ -117,7 +117,15 @@ export default {
   justify-content: center;
   align-items: center;
   display: flex;
-  
+  .avatar-uploader{
+    flex:1;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    ::v-deep .el-upload.el-upload--text{
+      flex:1;
+    }
+  }
   .icon-size {
     font-size: 32px;
   }

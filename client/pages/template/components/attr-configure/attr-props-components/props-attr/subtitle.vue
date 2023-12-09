@@ -1,7 +1,7 @@
 <template>
   <div class="text">
     <el-form-item label="文本内容：">
-      <el-input type="textarea" :rows="2" placeholder="请输入文本内容" v-model="templateText"></el-input>
+      <el-input type="textarea" :rows="8" placeholder="请输入文本内容，换行分段" v-model="templateText"></el-input>
     </el-form-item>
     <el-form-item label="字体:">
       <el-select v-model="templateFont" placeholder="请选择" @change="changeFont">
@@ -23,7 +23,7 @@ import { mapGetters, mapState } from 'vuex';
 export default {
   name: 'attr-qk-subtitle',
   props: {
-    text: String,
+    subtitle: String,
     font: {
       type: String,
       default: 'wryh',
@@ -42,7 +42,7 @@ export default {
     };
   },
   mounted() {
-    this.templateText = this.text;
+    this.templateText = this.subtitle;
     this.templateFont = this.font
 
   },
@@ -61,10 +61,10 @@ export default {
   },
   watch: {
     text() {
-      this.templateText = this.text;
+      this.templateText = this.subtitle;
     },
     templateText() {
-      this.$emit("update:text", this.templateText);
+      this.$emit("update:subtitle", this.templateText);
     },
     templateFont() {
       this.$emit("update:font", this.templateFont)

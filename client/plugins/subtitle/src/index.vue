@@ -1,7 +1,7 @@
 <!--test.vue-->
 <template>
-  <div class="qk-text">
-    {{ text }}
+  <div class="qk-subtitle">
+    {{ subtitle }}
   </div>
 </template>
 
@@ -9,9 +9,9 @@
 export default {
   name: "QkSubtitle", // 这个名字很重要，它就是未来的标签名<qk-text></qk-text>
   props: {
-    text: {
+    subtitle: {
       type: String,
-      default: "这是一段字幕,按逗号分割"
+      default: "请输入文本内容(换行分段)"
     },
     font: {
       type: String,

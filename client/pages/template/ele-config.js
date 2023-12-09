@@ -15,6 +15,16 @@ export default [
         }
       },
       {
+        elName: "qk-subtitle",
+        title: "字幕",
+        icon: "iconfont iconwenben",
+        // 每个组件设置props来展示哪些显示哪些编辑项
+        valueType: "", // 标识数据类型，用于表单组件
+        defaultStyle: {
+          height: 40
+        }
+      },
+      {
         elName: "qk-image",
         title: "图片",
         icon: "iconfont icontupian",

@@ -1,8 +1,8 @@
 <!--test.vue-->
 <template>
   <div class='qk-video'>
-<!--    <video :src='videoUrl' v-if='videoSrc' autoplay></video>-->
-    <img src='/static/demo/video.jpg' alt=''/>
+   <video :src='videoUrl' v-if='videoSrc' autoplay width="100%" height="100%" controls style="object-fit:cover"></video>
+    <video src='/static/demo/video.jpg' v-else/>
   </div>
 </template>
 

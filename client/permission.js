@@ -15,18 +15,18 @@ router.beforeEach(async (to, from, next) => {
 	// 	return;
 	// }
 	// // 用户登录状态拦截
-	let loginStatus = await userModel.checkLoginState();
-	console.log(loginStatus)
-	if (!loginStatus) {
-		userModel.goLogin();
-		return false;
-	}else{
-		if(to.name=='Login'){
-			next(false)
-			NProgress.done()
-			return false
-		}
-	}
+	// let loginStatus = await userModel.checkLoginState();
+	// console.log(loginStatus)
+	// if (!loginStatus) {
+	// 	userModel.goLogin();
+	// 	return false;
+	// }else{
+	// 	if(to.name=='Login'){
+	// 		next(false)
+	// 		NProgress.done()
+	// 		return false
+	// 	}
+	// }
 
 	//TODO 黄维 根据加载的资源，更新路由meta属性中的title属性，所有的页面title使用route.meta.title
 	next()
