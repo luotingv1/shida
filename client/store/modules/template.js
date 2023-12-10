@@ -131,7 +131,7 @@ const actions = {
    */
   addElement({ commit }, elData) {
     let activePage = getters.activePage(state);
-    let data = editorProjectConfig.getElementConfig(elData, { zIndex: activePage.elements.length + 1 });
+    let data = editorProjectConfig.getElementConfig(elData, { zIndex: activePage.elements.length + 1,width:state.projectData.width });
     commit("addElement", data);
     commit("setActiveElementUUID", data.uuid);
     commit("addHistoryCache");

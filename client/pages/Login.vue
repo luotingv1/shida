@@ -1,7 +1,7 @@
 <template>
   <div class="page page-login">
     <div class="login-page-inner">
-      <el-form :model="formData" :rules="formRules" ref="loginForm" label-width="0px">
+      <!-- <el-form :model="formData" :rules="formRules" ref="loginForm" label-width="0px">
         <el-form-item prop="username">
           <el-input
             v-model="formData.username"
@@ -12,12 +12,12 @@
             <i slot="prefix" class="iconfont icon-zhanghao"></i>
           </el-input>
         </el-form-item>
-        <!-- <el-form-item prop="email" v-if="type === 'register'">
+        <el-form-item prop="email" v-if="type === 'register'">
           <el-input v-model="formData.email" autocomplete="off" placeholder="请输入邮箱" @keyup.enter.native="doLogin">
             <span slot="prefix" class="iconfont icon-mail-copy"></span>
           </el-input>
-        </el-form-item> -->
-        <!--  <el-form-item prop="password">
+        </el-form-item>
+         <el-form-item prop="password">
          <el-input
             v-model="formData.password"
             name="password"
@@ -44,23 +44,24 @@
               <i class="iconfont icon-xianshimima"></i>
             </span>
           </el-input> 
-        </el-form-item>-->
+        </el-form-item>
         <el-form-item>
           <div class="btn-hover" @click="doSubmit">
             {{ type === "login" ? "登录" : "注册" }}
           </div>
         </el-form-item>
-      </el-form>
+      </el-form> -->
       <!-- <div class="switch-do-type ">
         <p class="" @click="switchType">
           <i class="iconfont icon-iconfontzhizuobiaozhun47"></i>
           <span>{{ type === "login" ? "立即注册" : "马上登录" }}</span>
         </p>
       </div> -->
+      <div style="text-align:center">请从考试平台登陆</div>
     </div>
-    <div class="login-background">
+    <!-- <div class="login-background">
       <loginBackground />
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -209,7 +210,7 @@ export default {
   position: relative;
   z-index: 10;
   width: 360px;
-  padding: 40px 40px 20px;
+  padding: 20px 40px 20px;
   margin-top: -120px;
   background: white;
   box-shadow: 0px 0px 0px rgba(58, 127, 158, 0.35);

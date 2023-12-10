@@ -28,7 +28,10 @@
       <i class="iconfont iconbaocun"></i>
       <p>保存</p>
     </div>
-
+    <div class="button-item" @click="showPreviewFn">
+      <i class="iconfont iconyulan"></i>
+      <p>预览</p>
+    </div>
     <div class="button-item" @click="publishFn">
       <i class="iconfont iconfabu"></i>
       <p>发布</p>
@@ -103,6 +106,10 @@ export default {
      */
     publishFn() {
       this.$emit("publish");
+    },
+
+    showPreviewFn(){
+      this.$emit("showPreviewFn");
     },
 
     cancelFn() {

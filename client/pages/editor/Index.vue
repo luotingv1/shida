@@ -15,7 +15,7 @@
     <div class="editor-page-edit-wrapper">
       <componentLibs v-if="activeSideBar === 'componentLibs'" />
       <pageManage v-if="activeSideBar === 'pageManage'" />
-      <templateLibs v-if="activeSideBar === 'templateLibs'" />
+      <!-- <templateLibs v-if="activeSideBar === 'templateLibs'" /> -->
     </div>
 
     <!--页面编辑区域-->
@@ -27,6 +27,7 @@
           @cancel="cancelFn"
           @publish="publishFn"
           @save="saveFn"
+          @showPreviewFn="showPreviewFn"
         />
       </div>
       <editorPan :scale.sync="canvasConfig.scale" />
@@ -108,11 +109,11 @@ export default {
           value: "componentLibs",
           elementUiIcon: "el-icon-s-operation"
         },
-        {
-          label: "模板库",
-          value: "templateLibs",
-          elementUiIcon: "el-icon-files"
-        }
+        // {
+        //   label: "模板库",
+        //   value: "templateLibs",
+        //   elementUiIcon: "el-icon-files"
+        // }
       ],
       canvasConfig: {
         scale: 1
@@ -124,7 +125,10 @@ export default {
       projectData: state => state.editor.projectData,
       activePageUUID: state => state.editor.activePageUUID,
       activeElementUUID: state => state.editor.activeElementUUID
-    })
+    }),
+    kj_token(){
+      return this.$store.state.user.kj_token
+    }
   },
   created() {
     this.$store.dispatch("setPrjectData");
@@ -177,18 +181,27 @@ export default {
      * 发布----
      */
     async publishFn() {
-      const data = { ...this.projectData, isPublish: true };
-      this.showMakingPanel = true;
-      this.$API.updatePage({ pageData: data });
-      this.$nextTick(() => $bus.$emit("publish"));
+        //获取videourl 上传到跨境电商
+        if(!this.projectData.videoUrl){
+          this.$message.warn('请先预览生成视频,然后发布')
+          return;
+        }
+        this.$API.uploadvideo({videourl:location.origin+this.projectData.videoUrl},{'Authorization2':this.kj_token}).then(()=>{
+          this.$message.success('上传到素材库成功')
+        })
     },
 
     async showPreviewFn() {
       // await this.screenshots()
       // 提交数据再预览
-      this.$API.updatePage({ pageData: this.projectData }).then(() => {
-        this.showMakingPanel = true;
-      });
+      // this.$API.updatePage({ pageData: this.projectData }).then(() => {
+      //   this.showMakingPanel = true;
+      // });
+
+      const data = { ...this.projectData, isPublish: true };
+      this.showMakingPanel = true;
+      this.$API.updatePage({ pageData: data });
+      this.$nextTick(() => $bus.$emit("publish"));
     },
 
     /**

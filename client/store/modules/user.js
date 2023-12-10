@@ -4,8 +4,9 @@
 import { setLocalStorage, getLocalStorage } from "@/common/js/mUtils";
 const state = {
   access_token: "",
+  kj_token:'',
   permissionsList: [],
-  userInfo: {}
+  userInfo: {},
 };
 const actions = {};
 
@@ -18,12 +19,21 @@ const mutations = {
     // 存储状态
     mutations["SAVE_USER_TO_LOCAL"](state);
   },
-  
+
   /**
    * 更新oauth相关
    */
   UPDATE_ACCESS_TOKEN(state, data) {
     state.access_token = data || "";
+    // 存储状态
+    mutations["SAVE_USER_TO_LOCAL"](state);
+  },
+
+  /**
+   * 更新oauth相关
+   */
+  UPDATE_KJ_TOKEN(state, data) {
+    state.kj_token = data || "";
     // 存储状态
     mutations["SAVE_USER_TO_LOCAL"](state);
   },
@@ -57,7 +67,7 @@ const mutations = {
         state[key] = user[key];
       }
     }
-  }
+  },
 };
 
 const getters = {
@@ -66,12 +76,12 @@ const getters = {
   },
   userInfo(state) {
     return state.userInfo;
-  }
+  },
 };
 
 export default {
   state,
   actions,
   getters,
-  mutations
+  mutations,
 };

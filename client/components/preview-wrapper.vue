@@ -4,7 +4,7 @@
     <div class="preview-con" v-if="showVideo">
 <!--      <div class="center-panel" :style="style()">-->
       <div class="center-panel" :style="style()">
-        <video controls width="500px">
+        <video controls width="100%">
           <source :src="videoUrl" type="video/mp4" />
         </video>
       </div>
@@ -36,10 +36,11 @@ export default {
         const { width, height } = this.pageData;
 
         return {
-          width: width/1.5 + "px",
-          height: height/1.5 + "px",
-          "margin-left": '-12%',
-          "margin-top": '-20%'
+          maxWidth:'500px'
+          // width: width/1.5 + "px",
+          // height: height/1.5 + "px",
+          // "margin-left": '-12%',
+          // "margin-top": '-20%'
         };
       }
     };
@@ -92,6 +93,7 @@ export default {
   //overflow: hidden;
   background-color: #000;
   border: 0 solid #000;
+  transform: translate(-50%,-50%);
 }
 
 .close-btn {

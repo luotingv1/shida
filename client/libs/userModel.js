@@ -3,7 +3,7 @@
  * */
 import store from "@/store";
 import router from "@/router";
-import { login, register, getUserInfo, signin } from "@/api";
+import { login, register, getUserInfo, signin, threeLogin } from "@/api";
 
 let userModel = {
   /**
@@ -23,25 +23,48 @@ let userModel = {
   async doLogin(data) {
     return new Promise((resolve, reject) => {
       login(data)
-        .then(res => {
+        .then((res) => {
           store.commit("UPDATE_ACCESS_TOKEN", res.body.access_token);
           store.commit("UPDATE_USER_INFO", res.body.userInfo);
           resolve(res.body);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
   },
+
+  /**
+   * 检测是否登录
+   * @returns {Promise<void>}
+   */
+  async threelogin(token) {
+    return new Promise((resolve, reject) => {
+      threeLogin({token})
+        .then((res) => {
+          store.commit("UPDATE_KJ_TOKEN", res.data.token);
+          resolve(res.data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  },
+
+  /**
+   * 检测是否登录
+   * @returns {Promise<void>}
+   */
+
   async signIn(data) {
     return new Promise((resolve, reject) => {
       signin(data)
-        .then(res => {
+        .then((res) => {
           store.commit("UPDATE_ACCESS_TOKEN", res.body.access_token);
           store.commit("UPDATE_USER_INFO", res.body.userInfo);
           resolve(res.body);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -55,12 +78,12 @@ let userModel = {
   async doRegister(data) {
     return new Promise((resolve, reject) => {
       register(data)
-        .then(res => {
+        .then((res) => {
           store.commit("UPDATE_ACCESS_TOKEN", res.body.access_token);
           store.commit("UPDATE_USER_INFO", res.body.userInfo);
           resolve(res.body);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -73,11 +96,11 @@ let userModel = {
   getUserInfo() {
     return new Promise((resolve, reject) => {
       getUserInfo()
-        .then(res => {
+        .then((res) => {
           store.commit("UPDATE_USER_INFO", res.body);
           resolve(res.body);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -99,7 +122,10 @@ let userModel = {
   async goLogin() {
     // 将路由fullpath 保存在缓存中，用于登录完成后跳转
     let indexOf = window.location.href.indexOf("#/");
-    let currentUrl = window.location.href.slice(indexOf + 1, window.location.href.length);
+    let currentUrl = window.location.href.slice(
+      indexOf + 1,
+      window.location.href.length
+    );
     window.sessionStorage.setItem("beforeLoginUrl", currentUrl);
     store.commit("UPDATE_ACCESS_TOKEN", "");
     router.push({ name: "Login" });
@@ -113,7 +139,7 @@ let userModel = {
       router.push(url);
       window.sessionStorage.setItem("beforeLoginUrl", "");
     }
-  }
+  },
 };
 
 export default userModel;

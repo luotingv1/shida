@@ -123,7 +123,10 @@ export default {
     height: 100%;
     align-items: center;
     ::v-deep .el-upload.el-upload--text{
+      display: flex;
       flex:1;
+      max-height: 100%;
+      max-width: 100%;
     }
   }
   .icon-size {
@@ -138,6 +141,7 @@ export default {
     display: inline-block;
     max-width: 100%;
     max-height: 100%;
+    object-fit: cover;
   }
   
   p {

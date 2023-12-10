@@ -22,6 +22,7 @@ const configObj = {
 
   canvasH5Width: 608 ,
   canvasH5Height: 1080,
+  kjdomain:$config.kjdomain,
   pageModeList: [
     {
       value: "h5",

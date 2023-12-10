@@ -85,7 +85,7 @@ const addComponent = async (element) => {
       if (fs.pathExistsSync(fontFile)) {
         comp.setFont(fontFile);
       } else {
-        comp.setFont("../public/static/demo/wryh.ttf");
+        comp.setFont(path.join(__dirname, '../public/static/demo/wryh.ttf'));
       }
       comp.setAnchor(0.5);
       comp.alignCenter();

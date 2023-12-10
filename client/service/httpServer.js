@@ -27,7 +27,7 @@ axios.interceptors.request.use(
 //响应拦截器即异常处理
 axios.interceptors.response.use(
   response => {
-    if (response.data.status) {
+    if (response.data.status||response.data.success) {
       return Promise.resolve(response.data);
     } else {
       store.dispatch("showMassage", {
@@ -45,7 +45,7 @@ axios.interceptors.response.use(
           break;
         case 401:
           err.message = "未授权，请重新登录";
-          userModel.goLogin();
+          // userModel.goLogin();
           break;
         case 403:
           err.message = "没有访问权限，拒绝访问";
@@ -108,6 +108,15 @@ export default {
   },
   //post请求
   post(url, param, header) {
+    console.log({
+      method: "post",
+      url,
+      headers: {
+        ...(header || {}),
+        "Content-Type": "application/json;charse=UTF-8"
+      },
+      data: param || {}
+    });
     return axios({
       method: "post",
       url,
