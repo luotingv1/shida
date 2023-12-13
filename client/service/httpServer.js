@@ -45,7 +45,7 @@ axios.interceptors.response.use(
           break;
         case 401:
           err.message = "未授权，请重新登录";
-          // userModel.goLogin();
+          userModel.goLogin();
           break;
         case 403:
           err.message = "没有访问权限，拒绝访问";
@@ -80,10 +80,11 @@ axios.interceptors.response.use(
     } else {
       err.message = "连接到服务器失败";
     }
-    store.dispatch("showMassage", {
-      type: "error",
-      data: err.message || err.response.msg
-    });
+    // store.dispatch("showMassage", {
+    //   type: "error",
+    //   data: err.message || err.response.msg
+    // });
+    console.log(err.message || err.response.msg)
     return Promise.reject(err.response);
   }
 );
@@ -108,15 +109,6 @@ export default {
   },
   //post请求
   post(url, param, header) {
-    console.log({
-      method: "post",
-      url,
-      headers: {
-        ...(header || {}),
-        "Content-Type": "application/json;charse=UTF-8"
-      },
-      data: param || {}
-    });
     return axios({
       method: "post",
       url,

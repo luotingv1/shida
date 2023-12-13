@@ -1,7 +1,7 @@
 <template>
   <div class="page page-login">
     <div class="login-page-inner">
-      <!-- <el-form :model="formData" :rules="formRules" ref="loginForm" label-width="0px">
+      <el-form :model="formData" :rules="formRules" ref="loginForm" label-width="0px">
         <el-form-item prop="username">
           <el-input
             v-model="formData.username"
@@ -50,18 +50,17 @@
             {{ type === "login" ? "登录" : "注册" }}
           </div>
         </el-form-item>
-      </el-form> -->
-      <!-- <div class="switch-do-type ">
+      </el-form> 
+    <div class="switch-do-type ">
         <p class="" @click="switchType">
           <i class="iconfont icon-iconfontzhizuobiaozhun47"></i>
           <span>{{ type === "login" ? "立即注册" : "马上登录" }}</span>
         </p>
-      </div> -->
-      <div style="text-align:center">请从考试平台登陆</div>
+      </div>
     </div>
-    <!-- <div class="login-background">
+     <div class="login-background">
       <loginBackground />
-    </div> -->
+    </div> 
   </div>
 </template>
 
@@ -79,6 +78,7 @@ export default {
   },
   data() {
     return {
+      fromUrl:'',
       loading: false,
       loadingVerify: false,
       inputType: "password",
@@ -88,7 +88,6 @@ export default {
         username: "",
         password: "",
       },
-      fromUrl:'',
       formRules: {
         username: [{ required: true, message: "用户名不能为空", trigger: "blur" }],
         password: [{ required: true, message: "密码不能为空", trigger: "blur" }],
@@ -100,38 +99,18 @@ export default {
     this.fromUrl = this.$route.query.from
       ? window.decodeURIComponent(this.$route.query.from)
       : "";
+      console.log(this.fromUrl)
   },
   methods: {
     /**登陆*/
-    // doSubmit() {
-    //   // 验证成功
-    //   this.$refs.loginForm.validate(valid => {
-    //     let fnName = this.type === "login" ? "doLogin" : "doRegister";
-    //     if (valid) {
-    //       this[fnName]();
-    //     } else {
-    //       this.$store.dispatch("showMassage", { type: "error", message: "请正确填写表单！" });
-    //       return false;
-    //     }
-    //   });
-    // },
     doSubmit() {
       // 验证成功
-      this.$refs.loginForm.validate((valid) => {
+      this.$refs.loginForm.validate(valid => {
+        let fnName = this.type === "login" ? "doLogin" : "doRegister";
         if (valid) {
-          let formData = { ...this.formData };
-          userModel.signIn(formData).then(() => {
-            if (this.fromUrl) {
-              this.$router.push(this.fromUrl);
-            } else {
-              userModel.goBeforeLoginUrl();
-            }
-          });
+          this[fnName]();
         } else {
-          this.$store.dispatch("showMassage", {
-            type: "error",
-            message: "请正确填写表单！",
-          });
+          this.$store.dispatch("showMassage", { type: "error", message: "请正确填写表单！" });
           return false;
         }
       });

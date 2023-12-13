@@ -30,8 +30,8 @@
     </div>
 
     <div class="button-item" @click="publishFn">
-      <i class="iconfont iconfabu"></i>
-      <p>发布</p>
+      <i class="iconfont iconyulan"></i>
+      <p>预览</p>
     </div>
   </div>
 </template>

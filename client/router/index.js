@@ -66,6 +66,16 @@ export default new Router({
         trust: true,
         noNeedLogin: true
       }
+    },
+    {
+      path: "/admintest",
+      name: "admintest",
+      component: () => import("@/pages/admintest"),
+      meta: {
+        hideHeader: true,
+        trust: true,
+        noNeedLogin: true
+      }
     }
   ]
 });

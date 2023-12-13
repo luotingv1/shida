@@ -183,7 +183,7 @@ export default {
     async publishFn() {
         //获取videourl 上传到跨境电商
         if(!this.projectData.videoUrl){
-          this.$message.warn('请先预览生成视频,然后发布')
+          this.$message.warning('请先预览生成视频,然后发布')
           return;
         }
         this.$API.uploadvideo({videourl:location.origin+this.projectData.videoUrl},{'Authorization2':this.kj_token}).then(()=>{

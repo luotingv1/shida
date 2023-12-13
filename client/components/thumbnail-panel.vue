@@ -101,23 +101,23 @@ export default {
           eventType: 'setTemplate',
           iconClass: '',
         },
-        {
-          title: '协作设置',
-          eventType: 'cooperation',
-          iconClass: '',
-        },
+        // {
+        //   title: '协作设置',
+        //   eventType: 'cooperation',
+        //   iconClass: '',
+        // },
         {
           title: '删除',
           eventType: 'delete',
           extraClassName: 'error',
           iconClass: '',
         },
-        {
-          title: '退出协作',
-          eventType: 'unCooperation',
-          extraClassName: 'error',
-          iconClass: '',
-        },
+        // {
+        //   title: '退出协作',
+        //   eventType: 'unCooperation',
+        //   extraClassName: 'error',
+        //   iconClass: '',
+        // },
       ],
     };
   },
@@ -307,8 +307,7 @@ export default {
     // 发布模板到模板市场
     publishTemplate() {
       this.loading = true;
-      this.$API
-        .publishPage({ id: this.pageData._id })
+      this.$API.publishPage({ id: this.pageData._id })
         .then(() => {
           this.loading = false;
           this.$message.success('发布成功');
