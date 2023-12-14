@@ -207,8 +207,8 @@ export default {
      * 发布----
      */
     async publishFn() {
-  
-      //先改名-改过了就不进行
+      await this.screenshots()
+      //先改名-改过了就不进行  名字是视频 就是空白模板  要求改名
       if (this.projectData.title === '视频'){
         this.$prompt("请输入标题", "提示", {
           confirmButtonText: "确定",
@@ -216,27 +216,30 @@ export default {
           inputValue: this.projectData.title
         })
           .then(({value}) => {
-            const data = {...this.projectData, title: value, isPublish: true};
+            const data = {...this.projectData, title: value, isPublish: false};
             this.$message.success("保存成功!");
-            this.$store.dispatch('template/setPrjectData', data)
+            //vuex 数据修改 isPublish=true  那就保存到创业模板里面了 防止学生上传到创意模板 那就isPublish=false
             console.log("pageData:", data)
             this.showMakingPanel = true;
             this.$API.templateUpdatePage({pageData: data})
+            this.$store.dispatch('template/setPrjectData', data)
             this.$nextTick(() => $bus.$emit("publishTemplate"));
           })
           .catch(() => {
           });
       } else {
-        const data = {...this.projectData, isPublish: true};
+       // 防止学生上传到创意模板 那就isPublish=false
+        const data = {...this.projectData, isPublish: false};
         this.showMakingPanel = true;
         this.$API.templateUpdatePage({pageData: data})
+        this.$store.dispatch('template/setPrjectData', data)
         this.$nextTick(() => $bus.$emit("publishTemplate"));
       }
      
     },
     
     async showPreviewFn() {
-      // await this.screenshots()
+      await this.screenshots()
       // 提交数据再预览
       this.$API.templateUpdatePage({pageData: this.projectData}).then(() => {
         this.showMakingPanel = true;
@@ -268,20 +271,8 @@ export default {
         html3canvas(el, {
           proxy: `${this.$config.baseURL}/common/html3canvas/corsproxy`
         }).then(canvas => {
-          const {file} = this.$mUtils.canvasToFile({canvas, quality: 0.6, type: "jpeg"});
-          const params = new FormData();
-          params.append("file", file);
-          
-          this.$axios
-            .post("/common/uploadFile", params)
-            .then(res => {
-              // 替换主图链接
-              this.projectData.coverImage = res.body;
-              resolve(res.body);
-            })
-            .catch(err => {
-              reject(err);
-            });
+          let url = canvas.toDataURL("image/jpeg");
+           this.$store.commit("template/updateCoverImage", url);
         });
       });
     },

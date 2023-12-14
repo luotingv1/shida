@@ -186,19 +186,23 @@ export default {
           this.$message.warning('请先预览生成视频,然后发布')
           return;
         }
-        this.$API.uploadvideo({videourl:location.origin+this.projectData.videoUrl},{'Authorization2':this.kj_token}).then(()=>{
-          this.$message.success('上传到素材库成功')
+        this.projectData.videoUrl=this.projectData.videoUrl.replace(/\\/g,'/');
+        console.log(this.projectData.videoUrl);
+        this.$API.uploadvideo({videourl:location.origin+this.projectData.videoUrl},{'Authorization2':this.kj_token}).then((data)=>{
+          if(data.success){
+            this.$message.success('上传到素材库成功')
+          }
         })
     },
 
     async showPreviewFn() {
-      // await this.screenshots()
+      await this.screenshots()
       // 提交数据再预览
       // this.$API.updatePage({ pageData: this.projectData }).then(() => {
       //   this.showMakingPanel = true;
       // });
 
-      const data = { ...this.projectData, isPublish: true };
+      const data = { ...this.projectData, isPublish: false };
       this.showMakingPanel = true;
       this.$API.updatePage({ pageData: data });
       this.$nextTick(() => $bus.$emit("publish"));
@@ -228,20 +232,9 @@ export default {
         html3canvas(el, {
           proxy: `${this.$config.baseURL}/common/html3canvas/corsproxy`
         }).then(canvas => {
-          const { file } = this.$mUtils.canvasToFile({ canvas, quality: 0.6, type: "jpeg" });
-          const params = new FormData();
-          params.append("file", file);
-
-          this.$axios
-            .post("/common/uploadFile", params)
-            .then(res => {
-              // 替换主图链接
-              this.projectData.coverImage = res.body;
-              resolve(res.body);
-            })
-            .catch(err => {
-              reject(err);
-            });
+           let url = canvas.toDataURL("image/jpeg");
+           this.$store.commit("updateCoverImage", url);
+          //  this.$store.commit("template/updateCoverImage", url);
         });
       });
     },

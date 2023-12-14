@@ -371,6 +371,7 @@ export default {
 .thumbnail-panel-cover {
   flex: 1;
   position: relative;
+  overflow: hidden;
   
   .image-wrapper {
     width: 100%;
